@@ -1,0 +1,44 @@
+﻿@model IEnumerable<AspnetIdentityRoleBasedTutorial.Data.Category>
+
+@{
+    ViewData["Title"] = "Category";
+}
+<h1> Welcome Page Management Category</h1>
+<div class="row">
+    <h3>Users Management</h3>  
+    <!-- Search form -->
+    
+    <p>
+        <a asp-controller="CourseCategory" asp-action="Create" class="btn btn-primary">
+            <i class="fas fa-plus-circle"></i> Create New
+        </a>
+    </p>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description </th>                    
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var category in Model)
+                {
+                    <tr>
+                        <td>@category.Name</td>
+                        <td>@category.Description</td>
+                        <td>
+                            <a asp-controller="CourseCategory" asp-action="Edit" asp-route-id="@category.Id" class="btn btn-primary">
+                                <i class="fas fa-edit"></i> Edit
+                            </a>
+                            <a asp-controller="CourseCategory" asp-action="Delete" asp-route-id="@category.Id" class="btn btn-danger">
+                                <i class="fas fa-trash-alt"></i> Delete
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,122 @@
+﻿@using AspnetIdentityRoleBasedTutorial.Data
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager;
+
+@{
+    ViewData["Title"] = "Staff";
+}
+<h1>Welcome to User Management Page</h1>
+<div class="row">
+    <h3>Users Management</h3>
+    <div class="col-md-8">
+        <form asp-action="Index" method="get">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Search by User Name" name="searchString">
+                <button class="btn btn-primary " type="submit"><i class="fas fa-search"></i>Search</button>
+            </div>
+        </form>
+    </div>
+    <p>
+        <a asp-controller="Staff" asp-action="Create" class="btn btn-primary">
+            <i class="fas fa-plus-circle"></i> Create New User
+        </a>
+    </p>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Student account</th>
+                    <th>Email</th>
+                    <th>Age</th>
+                    <th>Date of birth</th>
+                    <th>Education level</th>
+                    <th>Main programming language</th>
+                    <th>TOEIC score</th>
+                    <th>Experience details</th>
+                    <th>Address</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in ViewBag.Users)
+                {
+                    var roles = await UserManager.GetRolesAsync(user);
+                    if (roles.Contains("User"))
+                    {
+                        <tr>
+                            <td>@user.Name</td>
+                            <td>@user.UserName</td>
+                            <td>@user.Email</td>
+                            <td>@user.Age</td>
+                            <td>@user.Birthday</td>
+                            <td>@user.EducationLevel</td>
+                            <td>@user.Programming</td>
+                            <td>@user.ToeicScore</td>
+                            <td>@user.Experience</td>
+                            <td>@user.Address</td>
+                            <td>
+                                <a asp-controller="Staff" asp-action="Edit" asp-route-id="@user.Id" class="btn btn-primary">
+                                    <i class="fas fa-edit"></i> Edit
+                                </a>
+                                <a asp-controller="Staff" asp-action="Delete" asp-route-id="@user.Id" class="btn btn-danger">
+                                    <i class="fas fa-trash-alt"></i> Delete
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="row">
+    <h3>Trainer Management</h3>
+    <div class="col-md-6">
+        <form asp-action="Index" method="get">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Search by Trainer Name" name="searchString">
+                <button class="btn btn-primary " type="submit"><i class="fas fa-search"></i>Search</button>
+            </div>
+        </form>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Trainer account</th>
+                    <th>Number Phone</th>
+                    <th>Address</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in ViewBag.Users)
+                {
+                    var roles = await UserManager.GetRolesAsync(user);
+                    if (roles.Contains("Trainer"))
+                    {
+                        <tr>
+                            <td>@user.Name</td>
+                            <td>@user.UserName</td>
+                            <td>@user.PhoneNumber</td>
+                            <td>@user.Address</td>
+                            <td>@user.Email</td>
+                            <td>
+                                <a asp-controller="Staff" asp-action="EditTrainer" asp-route-id="@user.Id" class="btn btn-primary">
+                                    <i class="fas fa-edit"></i> Edit
+                                </a>
+                                <a asp-controller="Staff" asp-action="DeleteTrainer" asp-route-id="@user.Id" class="btn btn-danger">
+                                    <i class="fas fa-trash-alt"></i> Delete
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,34 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.3/components/logins/login-4/assets/css/login-4.css">
+    <link rel="stylesheet" href="~/AspnetIdentityRoleBasedTutorial.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+</head>
+<body>
+    <!-- Login 4 - Bootstrap Brain Component -->
+    <section class="p-3 p-md-4 p-xl-5">
+        <div class="container">
+            <div class="card border-light-subtle shadow-sm">
+                <div class="row g-0">
+                    <div class="col-12 col-md-6">
+                        <img height="80px" class="img-fluid rounded-start w-150 h-100 " loading="lazy" src="~/image/SAP.png">
+                    </div>
+                    <div class="col-12 col-md-6">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,42 @@
+﻿@model AspnetIdentityRoleBasedTutorial.Data.ApplicationUser
+
+@{
+    ViewData["Title"] = "Create New Trainer";
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <h1 class="mb-4 text-center">Create New Trainer</h1>
+        <form asp-action="CreateTrainer" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="form-label">Trainer Name</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserName" class="form-label">Trainer Account</label>
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>          
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="form-label">Phone Number</label>
+                <input asp-for="PhoneNumber" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="form-label">Address</label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="Email" class="form-label">Email</label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <!-- Add other properties as needed -->
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+    </div>
+</div>

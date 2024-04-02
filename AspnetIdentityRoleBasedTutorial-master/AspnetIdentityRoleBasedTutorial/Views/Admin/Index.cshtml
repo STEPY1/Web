@@ -1,0 +1,98 @@
+﻿@using AspnetIdentityRoleBasedTutorial.Data
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager;
+
+
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<h1 class="text-center">ADMIN DASHBOARD</h1>
+
+<div class="row">
+   
+        <h3>User Management</h3>
+        <p>
+            <a asp-controller="Admin" asp-action="Create" class="btn btn-primary">
+                <i class="fas fa-plus-circle"></i> Create New User
+            </a>
+        </p>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>      
+                        <th>Name</th>                       
+                        <th>Email</th>                   
+                        <th>Role</th>        
+                        
+                        <th>Action</th>
+                    </tr>
+                </thead>
+            <tbody>              
+                    @foreach (var user in ViewBag.Users)
+                    {
+                        // Kiểm tra vai trò của người dùng
+                        var roles = await UserManager.GetRolesAsync(user);
+                    if (roles.Contains("Trainer") || roles.Contains("Staff") @* || roles.Contains("Admin") *@)
+                        {
+                            <tr>
+                                <td>@user.Name</td>                            
+                                <td>@user.UserName</td>
+                                <td>
+                                @foreach (var role in await UserManager.GetRolesAsync(user))
+                                    {
+                                    
+                                        <span class="badge bg-primary">@role</span>
+                                    }
+                                </td>
+                                
+                                <td>
+                                    <a asp-controller="Admin" asp-action="Delete" asp-route-id="@user.Id" class="btn btn-danger">
+                                        <i class="fas fa-trash-alt"></i> Delete
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }               
+            </tbody>
+            </table>
+        </div>
+    
+</div>
+    <div class="row">
+        <h3>Role Management</h3>
+        <p>
+            <a asp-controller="Admin" asp-action="CreateRole" class="btn btn-primary">
+                <i class="fas fa-plus-circle"></i> Create New Role
+            </a>
+            @* <a asp-controller="Admin" asp-action="AddUserToRole" class="btn btn-primary">
+                <i class="fas fa-user-tag"></i> Add User to Role
+            </a> *@
+        </p>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var role in ViewBag.Roles)
+                    {
+                        <tr>
+                            <td>@role.Id</td>
+                            <td>@role.Name</td>
+                            <td>
+                                <a asp-controller="Admin" asp-action="DeleteRole" asp-route-id="@role.Id" class="btn btn-danger">
+                                    <i class="fas fa-trash-alt"></i> Delete
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+

@@ -1,0 +1,63 @@
+﻿@model IEnumerable<AspnetIdentityRoleBasedTutorial.Data.Topic>
+@using AspnetIdentityRoleBasedTutorial.Data;
+
+@{
+    ViewData["Title"] = "Topic Management";
+}
+
+<h1>Course Management</h1>
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Index" method="get">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search by Course name..." name="searchString" value="@ViewBag.CurrentFilter">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit"><i class="fas fa-search"></i>Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<p>
+    <a asp-controller="Topic" asp-action="Create" class="btn btn-primary">
+        <i class="fas fa-plus-circle"></i> Create New Course
+    </a>
+</p>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Course Name</th>
+                <th>Description</th>
+                <th>Topic Name</th>
+                <th>Student</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var topic in Model)
+            {
+                <tr>
+                    <td>@topic.TopicName</td>
+                    <td>@topic.Description</td>
+                    <td>@(topic.Course != null ? topic.Course.Name : "N/A")</td>
+                    <td>@(topic.Student != null ? topic.Student.UserName : "N/A")</td>
+                    <td>
+                        <a asp-controller="Topic" asp-action="Edit" asp-route-id="@topic.TopicId" class="btn btn-primary">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+                        <a asp-controller="Topic" asp-action="Delete" asp-route-id="@topic.TopicId" class="btn btn-danger">
+                            <i class="fas fa-trash-alt"></i> Delete
+                        </a>
+                        <a asp-controller="Topic" asp-action="AssignStudent" asp-route-id="@topic.TopicId" class="btn btn-success">
+                            <i class="fas fa-user-plus"></i> Assign Student
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

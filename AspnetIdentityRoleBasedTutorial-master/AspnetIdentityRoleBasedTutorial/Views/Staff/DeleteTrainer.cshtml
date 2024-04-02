@@ -1,0 +1,17 @@
+﻿
+@model Microsoft.AspNetCore.Identity.IdentityUser
+@{
+    ViewData["Title"] = "Delete Trainer";
+}
+
+<h1 class="mb-4">Delete User</h1>
+
+<div class="alert alert-danger " role="alert">
+    <p>Are you sure you want to delete the Trainer "<strong>@Model.UserName</strong>"?</p>
+</div>
+
+<form method="post" asp-action="DeleteTrainer" asp-route-id="@Model.Id">
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-controller="Staff" asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
+

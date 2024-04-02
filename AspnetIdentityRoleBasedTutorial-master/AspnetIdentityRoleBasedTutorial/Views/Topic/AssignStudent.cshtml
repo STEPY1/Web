@@ -1,0 +1,18 @@
+﻿@model AspnetIdentityRoleBasedTutorial.Data.Topic
+
+<h2>Assign Student to Course: @Model.TopicName</h2>
+
+<form asp-action="AssignStudent" method="post">
+    <div class="form-group">
+        <label asp-for="TopicName" class="control-label">Course Name</label>
+        <input asp-for="TopicName" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="StudentId" class="control-label">Student</label>
+        <select asp-for="StudentId" class="form-control" asp-items="@ViewBag.Students">
+            <option value="">-- Select Student --</option>
+        </select>
+        <span asp-validation-for="StudentId" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Assign Student</button>
+</form>

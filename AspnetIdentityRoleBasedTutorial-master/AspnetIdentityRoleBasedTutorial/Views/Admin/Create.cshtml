@@ -1,0 +1,52 @@
+﻿@model AspnetIdentityRoleBasedTutorial.Data.ApplicationUser
+
+@{
+    ViewData["Title"] = "Create New User";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <h1 class="mb-4 text-center">Create New User</h1>
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="mb-1">
+                <label asp-for="Name" class="form-label">Name</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="mb-1">
+                <label asp-for="UserName" class="form-label">Email</label>
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="mb-1">
+                <label asp-for="Email" class="form-label">Confirm Email</label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="mb-1">
+                <label asp-for="PasswordHash" class="form-label">Password</label>
+                <input asp-for="PasswordHash" class="form-control" autocomplete="new-password" aria-required="true" />
+                <span asp-validation-for="PasswordHash" class="text-danger"></span>
+            </div>
+
+            <div class="mb-1">
+                <label asp-for="SecurityStamp" class="form-label">Confirm Password</label>
+                <input asp-for="SecurityStamp" class="form-control" autocomplete="new-password" aria-required="true" />
+                <span asp-validation-for="SecurityStamp" class="text-danger"></span>
+            </div>
+
+            <div class="mb-1">
+                <label asp-for="RoleName" class="form-label">Role</label>
+                <select asp-for="RoleName" class="form-control" asp-items="@(new SelectList(ViewBag.Roles, "Name", "Name"))">
+                    <option value="">-- Select Role --</option>
+                </select>
+                <span asp-validation-for="RoleName" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Create</button>
+            <a asp-controller="Admin" asp-action="Index" class="btn btn-secondary">Back to List</a>
+        </form>
+    </div>
+</div>

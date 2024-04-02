@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Add User to Role";
+}
+
+<h1 class="text-center">Add User to Role</h1>
+<div class="container">
+    <div class="row ">
+        <div class="col-md-4">
+            <form method="post" asp-action="AddUserToRole">
+                <div class="form-group">
+                    <label for="userId" class="control-label">User:</label>
+                    <select id="userId" name="userId" class="form-control">
+                        <option value="">-- Select User --</option>
+                        @foreach (var user in ViewBag.Users)
+                        {
+                            <option value="@user.Id">@user.Email</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group">
+                <label for="roleName" class="control-label">Role:</label>
+                <div>
+                    @foreach (var role in ViewBag.Roles)
+                    {
+                        <div class="form-check">
+                            <input type="radio" id="@role.Name" name="roleName" value="@role.Name" class="form-check-input">
+                            <label class="form-check-label" for="@role.Name">@role.Name</label>
+                        </div>
+                    }
+                </div>
+            </div>
+
+                <button type="submit" class="btn btn-primary">Add User to Role</button>
+            </form>
+        </div>
+    </div>
+</div>

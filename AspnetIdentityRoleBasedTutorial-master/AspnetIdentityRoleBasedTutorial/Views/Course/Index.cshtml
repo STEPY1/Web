@@ -1,0 +1,63 @@
+﻿@model IEnumerable<AspnetIdentityRoleBasedTutorial.Data.Course>
+
+@{
+    ViewData["Title"] = "Topic Management";
+}
+
+<h1>Welcome to Topic Management</h1>
+<div class="row">
+    <h3>Topic Management</h3>
+    <!-- Search form -->
+    <form asp-controller="Course" asp-action="Index" method="get">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Search by course name..." name="searchString" value="@ViewBag.CurrentFilter">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="submit"><i class="fas fa-search"></i>Search</button>
+            </div>
+        </div>
+    </form>
+
+    <p>
+        <a asp-controller="Course" asp-action="Create" class="btn btn-primary">
+            <i class="fas fa-plus-circle"></i> Create New Topic
+        </a>
+        
+    </p>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Topic Name</th>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Trainer</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var course in Model)
+                {
+                    <tr>
+                        <td>@course.Name</td>
+                        <td>@course.Description</td>
+                        <td>@(course.Category != null ? course.Category.Name : "N/A")</td>
+                        <td>@(course.Trainer != null ? course.Trainer.Name : "N/A")</td>
+                        <td>
+                            <a asp-controller="Course" asp-action="Edit" asp-route-id="@course.CourseId" class="btn btn-primary">
+                                <i class="fas fa-edit"></i> Edit
+                            </a>
+                            <a asp-controller="Course" asp-action="Delete" asp-route-id="@course.CourseId" class="btn btn-danger">
+                                <i class="fas fa-trash-alt"></i> Delete
+                            </a>
+                            <a asp-controller="Course" asp-action="AddTrainer" asp-route-id="@course.CourseId" class="btn btn-success">
+                                <i class="fas fa-user-plus"></i> Assign Trainer
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
